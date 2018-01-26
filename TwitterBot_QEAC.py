@@ -31,6 +31,10 @@ leaking = ["is sinking",
            "leaks",
            "leak"]
 
+#And our default responses
+raircraft = "Helicopters are aircraft"
+rjets = "The F35 testing begins later this year"
+rleaks = "This is what sea trials are for, issues will be found and fixed!"
 
 ########################################################
 ########################################################
@@ -70,17 +74,17 @@ else:
             for a in aircraft:
                 if a in s.text:
                     screen_name = s.user.screen_name
-                    response = "@%s Helicopters are aircraft" % screen_name
+                    response = "@%s " % screen_name + " " + raircraft
                     s = api.update_status(response, s.id)
             for j in jets:
                 if j in s.text:
                     screen_name = s.user.screen_name
-                    response = "@%s The F35 testing begins later this year" % screen_name
+                    response = "@%s " % screen_name + " " + rjets
                     s = api.update_status(response, s.id)
             for l in leaking:
                 if l in s.text:
                     screen_name = s.user.screen_name
-                    response = "@%s This is what sea trials are for, issues will be found and fixed!" % screen_name
+                    response = "@%s " % screen_name + " " + rleaks
                     s = api.update_status(response, s.id)
     except tweepy.TweepError as e:
         print e
