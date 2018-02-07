@@ -12,7 +12,7 @@ ACCESS_TOKEN = "ACCESS_TOKEN"
 ACCESS_TOKEN_SECRET = "ACCESS_TOKEN_SECRET"
 
 #Search Terms
-query = "Queen Elizabeth OR Aircraft Carrier AND jet OR aircraft OR leak OR sink"
+query = "Queen Elizabeth OR Aircraft Carrier OR Type 45 AND jet OR aircraft OR leak OR sink OR don't or dont"
 
 #Filters to make sure we get the the right tweets
 aircraft = [ "no aircraft",
@@ -31,10 +31,13 @@ leaking = ["is sinking",
            "leaks",
            "leak"]
 
+t45 = ["warm water"]
+
 #And our default responses
 raircraft = "Helicopters are aircraft"
 rjets = "The F35 testing begins later this year"
 rleaks = "This is what sea trials are for, issues will be found and fixed!"
+rt45 = "The Type 45s have deployed to warm water frequently over the last year and they're not all in port."
 
 ########################################################
 ########################################################
@@ -85,6 +88,11 @@ else:
                 if l in s.text:
                     screen_name = s.user.screen_name
                     response = "@%s " % screen_name + " " + rleaks
+                    s = api.update_status(response, s.id)
+            for ship in t45:
+                if ship in s.text:
+                    screen_name = s.user.screen_name
+                    response = "@%s " % screen_name + " " + rt45
                     s = api.update_status(response, s.id)
     except tweepy.TweepError as e:
         print e
